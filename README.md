@@ -1,6 +1,8 @@
 # RPD
 Function and Analysis Scripts for Ratio Percentile Deviation Method:
 
+Please find the RPD function script in the MainText folder
+
 The RPD function is intended to be used as follows: copy or download the RPD function script, and run the entire script to load the calc.rpd() function into your R environment. Then, use the function as follows:
 
 calc.rpd(ref = XXXX, test = YYYY, ref.pers = ZZZZ)

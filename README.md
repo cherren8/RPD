@@ -1,7 +1,11 @@
 # RPD
 Function and Analysis Scripts for Ratio Percentile Deviation Method:
 
-Please find the RPD function script in the MainText folder
+This repository contains implementations of the Ratio Percentile Deviation (RPD) method in both R and Python.
+
+## R Implementation
+
+Please find the RPD function script in the MainText folder.
 
 The RPD function is intended to be used as follows: copy or download the RPD function script, and run the entire script to load the calc.rpd() function into your R environment. Then, use the function as follows:
 
@@ -13,20 +17,75 @@ calc.rpd(ref = XXXX, test = YYYY, ref.pers = ZZZZ, taxon.scores = T)
 
 The RPD function R script has supporting functions and a main calc.rpd function. The supporting functions are run within the calc.rpd function and do not need to be run by the user. 
 
-A package for Python does not yet exist, but you may find success in asking Claude code to translate the function from R to Python
+## Python Implementation
 
-FAQ:
+A Python package implementation of the RPD method is available in the `rpd-python` directory.
+
+### Installation
+
+To install the Python package:
+
+1. Navigate to the rpd-python directory:
+   ```
+   cd rpd-python
+   ```
+
+2. Install the package in development mode:
+   ```
+   pip install -e .
+   ```
+
+### Usage
+
+The Python package provides a function equivalent to the R implementation:
+
+```python
+from rpd import calc_rpd
+
+# Basic usage - returns sample-level RPD scores
+sample_rpd = calc_rpd(ref, test, ref_pers=0.85)
+
+# With taxon scores - returns tuple (taxon_rpd, sample_rpd)
+taxon_rpd, sample_rpd = calc_rpd(ref, test, ref_pers=0.85, taxon_scores=True)
+```
+
+Where:
+- `ref`: Reference dataset (samples x taxa)
+- `test`: Test dataset (samples x taxa) 
+- `ref_pers`: Reference persistence threshold (proportion of samples where taxon must be present)
+- `taxon_scores`: Boolean flag to return taxon-level scores
+
+## Example Usage
+
+See the Jupyter notebook in `rpd-python/examples/rpd_demo.ipynb` for a comprehensive demonstration of:
+- Loading and preparing data
+- Calculating RPD scores
+- Visualizing results
+- Comparing communities with known differences
+- Saving and loading results
+
+## FAQ
+
 - How many samples do I need in the reference set? In the test set?
   If working with experimental data where samples are homogenous, you may be able to use as few as 8-10 samples for a reference.
   The exact threshold is unknown without more empirical data, but this seems like a reasonable extrapolation from the observation that even 20 references worked well for a very heterogeneous dataset.
   There is no limit on test samples, although the RPD function does not handle single samples in the test set due to the reliance on matrix functions.
   If needing to calculate RPD on a single sample, simply duplicate the sample in a matrix or run it with other samples. 
+
 - How do I use RPD with experimental data?
   The most important thing is to have a representative dataset as a reference. This is likely the microbial community before perturbation, or in the control treatment.
   For each treatment, use those samples as the test dataset and the initial conditions or control treatment as the reference. You can then run statistical analyses on RPD values just like you would on diversity values. 
   It is best to use the same reference persistence threshold for all RPD calculations using the same reference if you intend to compare RPD values!
+
 - How do I select an appropriate reference persistence threshold?
   Your analysis should ideally use a reference persistence threshold where minor changes (i.e. 0.05 either direction) do not strongly change the results.
   For deeply sequenced datasets with high diversity, the persistence threshold will likely be higher.
   I generally started at 0.7 and then compared against 0.5 and 0.85, then moved up or down depending on which of those options was better.
   You can also try the analyses shown in the supplementary materials to more rigorously choose a reference persistence threshold. 
+
+## Supporting Files
+
+- `MainText/ReferenceDistributionDiagram_26May26.R`: Creates visualizations of reference distributions
+- `MainText/MendotaRPD_MainTextFigures_26May26.R`: Lake Mendota case study analysis combining RPD with nutrient data
+- `MainText/AGPandGBH_MainTextFigures_26May26.R`: Analysis of American Gut Project and Ghana Breast Health data
+- `Data/`: Contains example datasets used in the analyses

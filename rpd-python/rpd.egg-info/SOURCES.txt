@@ -1,0 +1,10 @@
+setup.py
+rpd/__init__.py
+rpd/core.py
+rpd/utils.py
+rpd.egg-info/PKG-INFO
+rpd.egg-info/SOURCES.txt
+rpd.egg-info/dependency_links.txt
+rpd.egg-info/requires.txt
+rpd.egg-info/top_level.txt
+tests/test_core.py

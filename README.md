@@ -55,14 +55,6 @@ Where:
 - `ref_pers`: Reference persistence threshold (proportion of samples where taxon must be present)
 - `taxon_scores`: Boolean flag to return taxon-level scores
 
-## Example Usage
-
-See the Jupyter notebook in `rpd-python/examples/rpd_demo.ipynb` for a comprehensive demonstration of:
-- Loading and preparing data
-- Calculating RPD scores
-- Visualizing results
-- Comparing communities with known differences
-- Saving and loading results
 
 ## FAQ
 
